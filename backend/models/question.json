@@ -1,0 +1,22 @@
+{
+  "jee": {
+    "mains": {
+      "Mathematics": [
+        { "question": "x^2 derivative?", "options": ["x", "2x", "x^2"], "answer": "2x" }
+      ]
+    },
+    "advanced": {
+      "Mathematics": [
+        { "question": "∫ x dx?", "options": ["x^2/2", "x^2", "2x"], "answer": "x^2/2" }
+      ]
+    }
+  },
+  "neet": {
+    "biology": {
+      "Biology": [
+        { "question": "Cell is basic unit of?", "options": ["Life", "Stone", "Wood"], "answer": "Life" }
+      ]
+    }
+  }
+}
+

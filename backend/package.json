@@ -1,0 +1,36 @@
+{
+  "jee-mains": {
+    "mathematics": [
+      { "question": "JEE Mains Maths Q1?", "options": ["A", "B", "C", "D"], "answer": "A" },
+      { "question": "JEE Mains Maths Q2?", "options": ["A", "B", "C", "D"], "answer": "B" }
+    ],
+    "physics": [
+      { "question": "JEE Mains Physics Q1?", "options": ["A", "B", "C", "D"], "answer": "C" }
+    ],
+    "chemistry": [
+      { "question": "JEE Mains Chemistry Q1?", "options": ["A", "B", "C", "D"], "answer": "D" }
+    ]
+  },
+  "jee-advanced": {
+    "mathematics": [
+      { "question": "JEE Adv Maths Q1?", "options": ["A", "B", "C", "D"], "answer": "A" }
+    ],
+    "physics": [
+      { "question": "JEE Adv Physics Q1?", "options": ["A", "B", "C", "D"], "answer": "B" }
+    ],
+    "chemistry": [
+      { "question": "JEE Adv Chemistry Q1?", "options": ["A", "B", "C", "D"], "answer": "C" }
+    ]
+  },
+  "neet": {
+    "biology": [
+      { "question": "NEET Bio Q1?", "options": ["A", "B", "C", "D"], "answer": "A" }
+    ],
+    "physics": [
+      { "question": "NEET Physics Q1?", "options": ["A", "B", "C", "D"], "answer": "B" }
+    ],
+    "chemistry": [
+      { "question": "NEET Chemistry Q1?", "options": ["A", "B", "C", "D"], "answer": "C" }
+    ]
+  }
+}

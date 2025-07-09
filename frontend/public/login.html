@@ -1,0 +1,195 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>QuizApp - Login & Register</title>
+  
+  <style>
+    /* Basic Reset and Fonts */
+    * {
+      box-sizing: border-box;
+      margin: 0;
+      padding: 0;
+      font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+    }
+
+    /* Background: clean and modern with full screen cover */
+    body {
+      background: url('https://images.unsplash.com/photo-1519389950473-47ba0277781c?fit=crop&w=1400&q=80') 
+                  no-repeat center center fixed;
+      background-size: cover;
+      display: flex;
+      justify-content: center;
+      align-items: center;
+      min-height: 100vh;
+      padding: 20px;
+    }
+
+    /* Main container for both login and signup forms */
+    .container {
+      background-color: rgba(255, 255, 255, 0.95);
+      padding: 40px;
+      border-radius: 12px;
+      width: 100%;
+      max-width: 400px;
+      box-shadow: 0 8px 20px rgba(0, 0, 0, 0.2);
+    }
+
+    /* Logo styling */
+    .container img {
+      display: block;
+      margin: 0 auto 20px;
+      width: 80px;
+    }
+
+    /* Form titles */
+    h2 {
+      text-align: center;
+      margin-bottom: 20px;
+      color: #2c3e50;
+    }
+
+    /* Form fields spacing */
+    .form-group {
+      margin-bottom: 15px;
+    }
+
+    /* Labels styling */
+    label {
+      display: block;
+      margin-bottom: 6px;
+      color: #34495e;
+    }
+
+    /* Input fields styling */
+    input[type="text"], input[type="password"], input[type="email"] {
+      width: 100%;
+      padding: 10px;
+      border: 1px solid #bdc3c7;
+      border-radius: 6px;
+      transition: border-color 0.3s;
+    }
+
+    /* Input focus effect */
+    input:focus {
+      border-color: #2980b9;
+      outline: none;
+    }
+
+    /* Submit buttons styling */
+    button {
+      width: 100%;
+      padding: 12px;
+      background-color: #2980b9;
+      color: white;
+      border: none;
+      border-radius: 6px;
+      font-size: 16px;
+      cursor: pointer;
+      transition: background-color 0.3s;
+    }
+
+    /* Button hover effect */
+    button:hover {
+      background-color: #1f6391;
+    }
+
+    /* Toggle links to switch between forms */
+    .toggle-link {
+      margin-top: 10px;
+      text-align: center;
+      font-size: 14px;
+      color: #2980b9;
+      cursor: pointer;
+    }
+
+    /* Footer text */
+    .footer-text {
+      margin-top: 15px;
+      text-align: center;
+      font-size: 13px;
+      color: #7f8c8d;
+    }
+
+    /* Hide inactive form sections */
+    .form-section {
+      display: none;
+    }
+
+    /* Show active form */
+    .form-section.active {
+      display: block;
+    }
+  </style>
+</head>
+<body>
+
+  <div class="container">
+    <!-- Logo at the top -->
+    <img src="https://cdn-icons-png.flaticon.com/512/3135/3135715.png" alt="QuizApp Logo">
+
+    <!-- Login Form Section -->
+    <div id="loginForm" class="form-section active">
+      <h2>Login to QuizApp</h2>
+      <form action="#" method="post">
+        <div class="form-group">
+          <label for="login-username">Username or Email</label>
+          <input type="text" id="login-username" name="username" required />
+        </div>
+        <div class="form-group">
+          <label for="login-password">Password</label>
+          <input type="password" id="login-password" name="password" required />
+        </div>
+        <button type="submit">Login</button>
+      </form>
+      <!-- Friendly link to switch to signup -->
+      <div class="toggle-link" onclick="showSignup()">New user? Register here</div>
+    </div>
+
+    <!-- Signup/Register Form Section -->
+    <div id="signupForm" class="form-section">
+      <h2>Create your QuizApp Account</h2>
+      <form action="#" method="post">
+        <div class="form-group">
+          <label for="signup-username">Username</label>
+          <input type="text" id="signup-username" name="username" required />
+        </div>
+        <div class="form-group">
+          <label for="signup-email">Email</label>
+          <input type="email" id="signup-email" name="email" required />
+        </div>
+        <div class="form-group">
+          <label for="signup-password">Password</label>
+          <input type="password" id="signup-password" name="password" required />
+        </div>
+        <button type="submit">Register</button>
+      </form>
+      <!-- Friendly link to switch to login -->
+      <div class="toggle-link" onclick="showLogin()">Already have an account? Login</div>
+    </div>
+
+    <!-- Footer -->
+    <div class="footer-text">
+      &copy; 2025 QuizApp. All rights reserved.
+    </div>
+  </div>
+
+  <script>
+    /**
+     * Toggle between login and signup forms
+     * This keeps the user on the same page and makes the UX smooth.
+     */
+    function showSignup() {
+      document.getElementById('loginForm').classList.remove('active');
+      document.getElementById('signupForm').classList.add('active');
+    }
+
+    function showLogin() {
+      document.getElementById('signupForm').classList.remove('active');
+      document.getElementById('loginForm').classList.add('active');
+    }
+  </script>
+  
+</body>
+</html>

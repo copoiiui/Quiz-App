@@ -1,0 +1,189 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8" />
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Choose Your Stream</title>
+<style>
+  body {
+    font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+    background: linear-gradient(135deg, #e8ecf3, #d3d9e3);
+    margin: 0;
+    padding: 0;
+    color: #333;
+  }
+  .container {
+    max-width: 500px;
+    margin: 60px auto;
+    background: #fff;
+    border-radius: 12px;
+    box-shadow: 0 6px 18px rgba(0,0,0,0.1);
+    padding: 30px;
+  }
+  h2 {
+    text-align: center;
+    color: #2c3e50;
+    margin-bottom: 20px;
+  }
+  .section {
+    margin: 20px 0;
+  }
+  .section label {
+    display: block;
+    padding: 10px 15px;
+    margin: 6px 0;
+    border-radius: 6px;
+    background: #f5f6f8;
+    cursor: pointer;
+    border: 1px solid #ccc;
+    transition: background 0.3s, border-color 0.3s;
+  }
+  .section input[type="radio"]:checked + label,
+  .section input[type="checkbox"]:checked + label {
+    background: #e0f4e8;
+    border-color: #27ae60;
+    color: #27ae60;
+    font-weight: 600;
+  }
+  input[type="radio"], input[type="checkbox"] {
+    display: none;
+  }
+  button {
+    display: inline-block;
+    width: 48%;
+    padding: 12px;
+    margin-top: 20px;
+    border: none;
+    background: #2980b9;
+    color: #fff;
+    font-size: 16px;
+    border-radius: 6px;
+    cursor: pointer;
+    transition: background 0.3s;
+  }
+  button:hover {
+    background: #1f6391;
+  }
+  .btn-full {
+    width: 100%;
+  }
+</style>
+</head>
+<body>
+<div class="container">
+  <h2>Choose Your Stream</h2>
+  
+  <div class="section" id="streamSection">
+    <input type="radio" id="jee" name="stream" value="jee">
+    <label for="jee">JEE</label>
+    
+    <input type="radio" id="neet" name="stream" value="neet">
+    <label for="neet">NEET</label>
+    
+    <input type="radio" id="both" name="stream" value="both">
+    <label for="both">Both</label>
+    
+    <button class="btn-full" onclick="showSubjects()">Next</button>
+  </div>
+  
+  <div class="section" id="subjectsSection" style="display:none;">
+    <h2>Select Subjects</h2>
+    <div id="subjectsList"></div>
+    <div style="display: flex; justify-content: space-between;">
+      <button onclick="goBack()">Previous</button>
+      <button onclick="submitSubjects()">Submit</button>
+    </div>
+  </div>
+</div>
+
+<script>
+function showSubjects() {
+  const stream = document.querySelector('input[name="stream"]:checked');
+  const subjectsList = document.getElementById('subjectsList');
+  const subjectsSection = document.getElementById('subjectsSection');
+  
+  if(!stream) {
+    alert('Please select your stream.');
+    return;
+  }
+  
+  let subjects = [];
+  if(stream.value === 'jee') {
+    subjects = ['Mathematics','Physics','Chemistry'];
+  } else if(stream.value === 'neet') {
+    subjects = ['Biology','Chemistry','Physics'];
+  } else if(stream.value === 'both') {
+    subjects = ['Mathematics','Physics','Chemistry','Biology'];
+  }
+  
+  subjectsList.innerHTML = '';
+  subjects.forEach((subject,i) => {
+    const id = 'sub'+i;
+    subjectsList.innerHTML += `
+      <input type="checkbox" id="${id}" value="${subject}">
+      <label for="${id}">${subject}</label>
+    `;
+  });
+  
+  document.getElementById('streamSection').style.display = 'none';
+  subjectsSection.style.display = 'block';
+}
+
+function goBack() {
+  document.getElementById('subjectsSection').style.display = 'none';
+  document.getElementById('streamSection').style.display = 'block';
+}
+
+function submitSubjects() {
+  const selectedSubjects = Array.from(document.querySelectorAll('#subjectsList input[type="checkbox"]:checked'))
+    .map(cb => cb.value);
+  if(selectedSubjects.length === 0) {
+    alert('Please select at least one subject.');
+    return;
+  }
+  alert('You selected: ' + selectedSubjects.join(', '));
+}
+</script>
+</body>
+</html>
+
+<!DOCTYPE html>
+<html>
+<head>
+<meta charset="UTF-8" />
+<title>Choose Subjects</title>
+<link rel="stylesheet" href="style.css" />
+</head>
+<body>
+<div class="container">
+  <h2>Choose Subjects</h2>
+  <div id="list"></div>
+  <div>
+    <button onclick="back()">Previous</button>
+    <button onclick="next()">Start Quiz</button>
+  </div>
+</div>
+<script>
+const stream=localStorage.getItem('stream');
+let subjects=[];
+if(stream=='jee') subjects=['Mathematics','Physics','Chemistry'];
+else if(stream=='neet') subjects=['Biology','Chemistry','Physics'];
+else subjects=['Mathematics','Physics','Chemistry','Biology'];
+const list=document.getElementById('list');
+subjects.forEach(s=>{
+  const id=s.replace(/\s+/g,'');
+  list.innerHTML+=`<input type="checkbox" id="${id}" value="${s}"><label for="${id}">${s}</label>`;
+});
+function back(){ 
+  if(stream=='jee') location.href='goals.html';
+  else location.href='index.html';
+}
+function next(){
+  const selected=Array.from(document.querySelectorAll('input[type=checkbox]:checked')).map(x=>x.value);
+  if(!selected.length) return alert("Select subjects");
+  localStorage.setItem('subjects', JSON.stringify(selected));
+  location.href='quiz.html';
+}
+</script>
+</body>
+</html>

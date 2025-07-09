@@ -1,0 +1,77 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8" />
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>QuizApp - Login & Register</title>
+<link rel="stylesheet" href="style.css" />
+</head>
+<body>
+<div class="container">
+  <h2>Login</h2>
+  <form onsubmit="loginUser(event)">
+    <input type="text" id="login-username" placeholder="Username or Email" required />
+    <input type="password" id="login-password" placeholder="Password" required />
+    <button type="submit">Login</button>
+  </form>
+  <h2>Register</h2>
+  <form onsubmit="registerUser(event)">
+    <input type="text" id="signup-username" placeholder="Username" required />
+    <input type="email" id="signup-email" placeholder="Email" required />
+    <input type="password" id="signup-password" placeholder="Password" required />
+    <button type="submit">Register</button>
+  </form>
+</div>
+<script>
+async function loginUser(e) {
+  e.preventDefault();
+  const username = document.getElementById('login-username').value;
+  const password = document.getElementById('login-password').value;
+  const res = await fetch('http://localhost:5000/login', {
+    method:'POST', headers:{'Content-Type':'application/json'},
+    body: JSON.stringify({ username, password })
+  });
+  const data = await res.json();
+  alert(data.message);
+}
+async function registerUser(e) {
+  e.preventDefault();
+  const username = document.getElementById('signup-username').value;
+  const email = document.getElementById('signup-email').value;
+  const password = document.getElementById('signup-password').value;
+  const res = await fetch('http://localhost:5000/register', {
+    method:'POST', headers:{'Content-Type':'application/json'},
+    body: JSON.stringify({ username, email, password })
+  });
+  const data = await res.json();
+  alert(data.message);
+}
+</script>
+</body>
+</html>
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <title>Choose Your Stream</title>
+  <link rel="stylesheet" href="style.css" />
+</head>
+<body>
+<div class="container">
+  <h2>Choose Your Stream</h2>
+  <input type="radio" id="jee" name="stream" value="jee"><label for="jee">JEE</label>
+  <input type="radio" id="neet" name="stream" value="neet"><label for="neet">NEET</label>
+  <input type="radio" id="both" name="stream" value="both"><label for="both">Both</label>
+  <button onclick="next()">Next</button>
+</div>
+<script>
+function next() {
+  const stream = document.querySelector('input[name="stream"]:checked')?.value;
+  if (!stream) return alert("Select stream");
+  localStorage.setItem('stream', stream);
+  if(stream=='jee') location.href='goals.html';
+  else location.href='subjects.html';
+}
+</script>
+</body>
+</html>

@@ -1,0 +1,44 @@
+<!DOCTYPE html>
+<html>
+<head><meta charset="UTF-8" /><title>Quiz</title><link rel="stylesheet" href="style.css"/></head>
+<body>
+<div class="container">
+  <h2 id="title"></h2>
+  <div id="question"></div>
+  <div id="options"></div>
+  <button onclick="next()">Next</button>
+</div>
+<script>
+let subjectList=JSON.parse(localStorage.getItem('subjects'));
+let stream=localStorage.getItem('stream');
+let goal=localStorage.getItem('goal')||'mains';
+let subject=subjectList[0]; // just first subject for demo
+let questions=[], current=0, score=0;
+
+fetch(`http://localhost:5000/api/questions?stream=${stream}&goal=${goal}&subject=${subject}`)
+.then(res=>res.json()).then(data=>{
+  questions=data; show();
+});
+
+function show(){
+  if(current>=questions.length) return finish();
+  document.getElementById('title').innerText=`${subject} - Question ${current+1}`;
+  let q=questions[current];
+  document.getElementById('question').innerText=q.question;
+  document.getElementById('options').innerHTML=q.options.map((opt,i)=>
+    `<input type="radio" name="opt" id="o${i}" value="${opt}">
+     <label for="o${i}">${opt}</label>`).join('');
+}
+function next(){
+  let sel=document.querySelector('input[name=opt]:checked');
+  if(sel && sel.value==questions[current].answer) score++;
+  current++; show();
+}
+function finish(){
+  localStorage.setItem('score',score);
+  localStorage.setItem('total',questions.length);
+  location.href='result.html';
+}
+</script>
+</body>
+</html>
